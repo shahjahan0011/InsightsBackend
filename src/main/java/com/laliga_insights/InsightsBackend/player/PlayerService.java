@@ -2,14 +2,14 @@ package com.laliga_insights.InsightsBackend.player;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-@Component
+@Service
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
@@ -29,9 +29,13 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
-    public List<Player> getPlayer(String searchText){
+    public List<Player> getMultiplePlayers(List<String> searchText){
+        List<String> lowerCaseSearchText = searchText.stream()
+                .map(String::toLowerCase)
+                .toList();
+
         return playerRepository.findAll().stream()
-                .filter(player -> player.getName().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(player -> lowerCaseSearchText.contains(player.getName().toLowerCase()))
                 .collect(Collectors.toList());
     }
 
@@ -75,9 +79,8 @@ public class PlayerService {
     }
 
     @Transactional
-    public Player deletePlayer(String playerName) {
+    public void deletePlayer(String playerName) {
         playerRepository.deleteByName(playerName);
-        return null;
     }
 
 

@@ -21,7 +21,7 @@ public class PlayerController {
     @GetMapping
     public List<Player> getPlayers(
         @RequestParam(required = false) String team,
-        @RequestParam(required = false) String name,
+        @RequestParam(required = false) List<String> name,
         @RequestParam(required = false) String position,
         @RequestParam(required = false) String country){
 
@@ -30,7 +30,7 @@ public class PlayerController {
             } else if (team != null) {
                 return playerService.getPlayersByTeam(team);
             } else if (name != null) {
-                return playerService.getPlayer(name);
+                return playerService.getMultiplePlayers(name);
             } else if (country != null) {
                 return playerService.getPlayerByCountry(country);
             } else if (position != null) {
@@ -38,7 +38,7 @@ public class PlayerController {
             } else {
                 return playerService.getPlayers();
             }
-    }
+        }
 
     @PostMapping
     public ResponseEntity<Player> addPlayer(@RequestBody Player newPlayer) {
