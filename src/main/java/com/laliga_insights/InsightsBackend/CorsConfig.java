@@ -13,7 +13,9 @@ public class CorsConfig {
             @Override
             public void addCorsMappings (CorsRegistry registry){
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:3000", "https://laliga-insights.vercel.app");
+                        .allowedOrigins("http://localhost:3000", "https://laliga-insights.vercel.app/")
+                        .allowedMethods("GET")
+                        .allowedHeaders("*");
             }
         };
     }

@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 public class Player {
 
     @Id
-    @Column(name = "player_name") //players can have the same name
+    @Column(name = "name") //players can have the same name
     private String name;
     private String country;
     private String position;
@@ -21,7 +21,7 @@ public class Player {
     private Integer minutes_played;
     private Integer goals;
     private Integer assists;
-    private Integer penalties_scored;
+    private Integer penalty;
     private Integer yellow_cards;
     private Integer red_cards;
     private Integer expected_goals;
@@ -31,7 +31,7 @@ public class Player {
     public Player() {
     }
 
-    public Player(String name, String country, String position, Integer age, Integer matches_played, Integer starts, Integer minutes_played, Integer goals, Integer assists, Integer penalties_scored, Integer yellow_cards, Integer red_cards, Integer expected_goals, Integer expected_assists, String team_name) {
+    public Player(String name, String country, String position, Integer age, Integer matches_played, Integer starts, Integer minutes_played, Integer goals, Integer assists, Integer penalty, Integer yellow_cards, Integer red_cards, Integer expected_goals, Integer expected_assists, String team_name) {
         this.name = name;
         this.country = country;
         this.position = position;
@@ -41,7 +41,7 @@ public class Player {
         this.minutes_played = minutes_played;
         this.goals = goals;
         this.assists = assists;
-        this.penalties_scored = penalties_scored;
+        this.penalty = penalty;
         this.yellow_cards = yellow_cards;
         this.red_cards = red_cards;
         this.expected_goals = expected_goals;
@@ -126,11 +126,11 @@ public class Player {
     }
 
     public Integer getPenalties_scored() {
-        return penalties_scored;
+        return penalty;
     }
 
-    public void setPenalties_scored(Integer penalties_scored) {
-        this.penalties_scored = penalties_scored;
+    public void setPenalties_scored(Integer penalty) {
+        this.penalty = penalty;
     }
 
     public Integer getYellow_cards() {
