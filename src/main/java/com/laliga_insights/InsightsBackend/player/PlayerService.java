@@ -35,7 +35,8 @@ public class PlayerService {
                 .toList();
 
         return playerRepository.findAll().stream()
-                .filter(player -> lowerCaseSearchText.contains(player.getName().toLowerCase()))
+                .filter(player -> lowerCaseSearchText.stream().anyMatch(search -> player.getName().toLowerCase().contains(search))) //works with incomplete strings
+                //lowerCaseSearchText.contains(player.getName().toLowerCase()) 'needed eact string to work'
                 .collect(Collectors.toList());
     }
 
@@ -45,10 +46,13 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
-    public List<Player> getPlayerByCountry(String searchText){
-        return playerRepository.findAll().stream()
-                .filter(player -> player.getCountry().toLowerCase().contains(searchText.toLowerCase()))
-                .collect(Collectors.toList());
+//    public List<Player> getPlayerByCountry(String searchText){
+//        return playerRepository.findAll().stream()
+//                .filter(player -> player.getCountry().toLowerCase().contains(searchText.toLowerCase()))
+//                .collect(Collectors.toList());
+//    }
+    public List<Player> getPlayerByCountry(String searchText) {
+        return playerRepository.findByCountryContainingIgnoreCase(searchText.trim());
     }
 
     public List<Player> getPlayerByTeamAndPosition(String teamName, String position){
